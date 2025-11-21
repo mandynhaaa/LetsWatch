@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('movie_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['like', 'dislike', 'superlike']);
+            $table->enum('type', ['like', 'dislike']);
             $table->timestamps();
             $table->unique(['user_id', 'movie_id']);
         });

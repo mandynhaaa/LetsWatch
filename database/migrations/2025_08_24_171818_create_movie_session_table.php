@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('group_id')->constrained();
             $table->foreignId('movie_id')->constrained();
             $table->timestamp('watched_at')->useCurrent();
-            $table->string('snack')->nullable();
-            $table->string('drink')->nullable();
+            $table->unsignedTinyInteger('rating')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }
