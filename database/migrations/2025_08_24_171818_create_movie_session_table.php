@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('movie_session', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('group_id')->constrained();
-            $table->foreignId('movie_id')->constrained();
+            $table->foreignId('group_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('tmdb_movie_id')->index();
             $table->timestamp('watched_at')->useCurrent();
             $table->unsignedTinyInteger('rating')->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
+            $table->unique(['group_id', 'tmdb_movie_id']);
         });
     }
 

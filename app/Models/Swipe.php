@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Swipe extends Model
 {
-    //
+    protected $fillable = [
+        'user_id',
+        'tmdb_movie_id',
+        'type',
+    ];
 }
