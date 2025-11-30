@@ -3,8 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Swipe;
 use App\Models\User;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -43,12 +44,37 @@ class MovieController extends Controller
         return null;
     }
 
+    private function fetchAndCacheGenres()
+    {
+        $apiKey = env('TMDB_API_KEY');
+        $baseUrl = env('TMDB_BASE_URL');
+        return Cache::remember('tmdb_genres', 86400, function () use ($apiKey, $baseUrl) {
+            $response = Http::get("{$baseUrl}genre/movie/list", [
+                'api_key' => $apiKey,
+                'language' => 'pt-BR',
+            ]);
+            if ($response->successful()) {
+                return collect($response->json()['genres'])->pluck('name', 'id')->toArray();
+            }
+            return [];
+        });
+    }
+
     public function index()
     {
         $nextMovie = $this->getNextUnswipedMovie();
+        $genreMap = $this->fetchAndCacheGenres();
+        if ($nextMovie && isset($nextMovie['genre_ids'])) {
+            $genreNames = collect($nextMovie['genre_ids'])
+                ->map(fn($id) => $genreMap[$id] ?? 'Desconhecido')
+                ->implode(', ');
+        } else {
+            $genreNames = 'N/A';
+        }
         return view('home', [
             'movie' => $nextMovie,
             'posterBaseUrl' => $this->posterBaseUrl,
+            'genreNames' => $genreNames,
         ]);
     }
     

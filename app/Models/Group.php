@@ -2,16 +2,26 @@
 
 namespace App\Models;
 
-use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Group extends Model
 {
-    
-    
-    public function users(): BelongsToMany
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'created_by_user_id',
+        'invite_code',
+    ];
+
+    public function creator()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'created_by_user_id');
+    }
+
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'group_members'); 
     }
 }
