@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('nav')
+    @includeIf('components.nav')
+@endsection
+
 @section('content')
     <h1>Grupo {{ $group->name }}</h1>
     @if (session('success'))

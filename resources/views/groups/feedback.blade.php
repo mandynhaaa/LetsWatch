@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('nav')
+    @includeIf('components.nav')
+@endsection
+
 @section('content')
     <h1>Feedback para: {{ $movieDetails['title'] }}</h1>
     @if (session('error'))
@@ -34,6 +39,9 @@
             >{{ old('comment', $existingFeedback->comment ?? '') }}</textarea>
             @error('comment') <span style="color: red;">{{ $message }}</span> @enderror
         </div>
+        <button type="button" style="padding: 10px 20px; background-color: #898989; color: white; border: none; border-radius: 4px; cursor: pointer;" onclick="window.history.back();">
+            Voltar
+        </button>
         <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
             {{ $existingFeedback ? 'Atualizar Feedback' : 'Salvar Feedback' }}
         </button>

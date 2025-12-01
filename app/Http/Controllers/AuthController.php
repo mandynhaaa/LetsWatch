@@ -11,7 +11,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-
     public function showRegistrationForm()
     {
         return view('auth.register');
@@ -56,6 +55,11 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        if (Auth::check()) {
+            $user = $request->user();
+            $user->setRememberToken(null);
+            $user->save();
+        }
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

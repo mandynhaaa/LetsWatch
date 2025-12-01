@@ -142,4 +142,13 @@ class GroupController extends Controller
         );
         return redirect()->route('groups.show', $group)->with('success', 'Feedback salvo com sucesso!');
     }
+
+    public function listMyGroups()
+    {
+        $user = Auth::user();
+        $createdGroups = Group::where('created_by_user_id', $user->id)->get();
+        $memberGroups = $user->groups()->get();
+        $allGroups = $createdGroups->merge($memberGroups)->unique('id');
+        return view('groups.index', compact('allGroups'));
+    }
 }

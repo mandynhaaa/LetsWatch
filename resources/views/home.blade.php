@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('nav')
+    @includeIf('components.nav')
+@endsection
+
 @section('content')
 @if (session('error'))
     <p class="text-center text-red-500 font-semibold">{{ session('error') }}</p>
