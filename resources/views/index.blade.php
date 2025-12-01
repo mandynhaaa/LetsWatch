@@ -1,11 +1,32 @@
 @extends('layouts.app')
+
 @section('content')
-    <x-layout title="Bem-vindo ao LetsWatch">
-        <div class="container mt-5 text-center">
-            <h1>LetsWatch</h1>
-            <p class="lead">Gerencie seus filmes favoritos de forma fácil e rápida.</p>
-            <a href="/login" class="btn btn-outline-secondary mt-3">Login</a>
-            <a href="/register" class="btn btn-outline-primary mt-3">Criar Conta</a>
+
+<div class="container-center">
+
+    <div class="panel">
+
+        <img src="/images/logo.png" alt="Let's Watch" class="logo">
+
+        <p>
+            Gerencie seus filmes favoritos de forma<br>
+            simples, rápida e divertida.
+        </p>
+
+        <div class="flex flex-col gap-4">
+
+            <a href="/login" class="btn-login">
+                Login
+            </a>
+            <br>
+            <a href="/register" class="btn-login">
+                Criar Conta
+            </a>
+
         </div>
-    </x-layout>
+
+    </div>
+
+</div>
+
 @endsection

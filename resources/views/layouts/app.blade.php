@@ -3,13 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'LetsWatch')</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <title>@yield('title', 'Let\'s Watch')</title>
+
+    {{-- Carrega CSS e JS via Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body style="height: 100%; margin: 0;">
-    <div id="app" style="height: 100%;">
+
+<body class="min-h-screen bg-[var(--bg)] text-[var(--text)]">
+    <div id="app" class="min-h-screen">
         @includeIf('components.nav')
-        <main class="py-4" style="height: 100%;">
+
+        <main>
             @yield('content')
         </main>
     </div>
