@@ -36,7 +36,7 @@ body {
     background: var(--bg);
 }
 
-/* Painel padrÆo */
+/* Painel padrï¿½o */
 .panel {
     width: 100%;
     max-width: 420px;
@@ -55,7 +55,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* Links / Botäes padrÆo */
+/* Links / Botï¿½es padrï¿½o */
 .panel a {
     width: 100%;
     padding: 14px;
@@ -68,7 +68,7 @@ body {
     transition: 0.2s ease-in-out;
 }
 
-/* BotÆo cinza */
+/* Botï¿½o cinza */
 .btn-login {
     border: 1px solid rgba(255,255,255,0.1);
     background: rgba(255,255,255,0.05);
@@ -79,7 +79,7 @@ body {
     background: rgba(255,255,255,0.12);
 }
 
-/* BotÆo de criar conta */
+/* Botï¿½o de criar conta */
 .btn-register {
     background: linear-gradient(90deg, var(--tinder-grad-1), var(--tinder-grad-2));
     color: #fff;
@@ -135,7 +135,8 @@ form input[type="password"]:focus {
     margin: 15px 0;
 }
 
-button[type="submit"] {
+button[type="submit"],
+button[type="button"] {
     width: 100%;
     padding: 14px;
     border-radius: 12px;
@@ -203,4 +204,30 @@ form input[type="password"]:focus {
     color: var(--text-muted);
     font-size: 1rem;
     line-height: 1.5;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: rgb(116, 116, 116);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #fe3927;
 }

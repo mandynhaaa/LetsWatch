@@ -143,9 +143,9 @@ class GroupController extends Controller
         return redirect()->route('groups.show', $group)->with('success', 'Feedback salvo com sucesso!');
     }
 
-    public function listMyGroups()
+    public function listMyGroups(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
         $createdGroups = Group::where('created_by_user_id', $user->id)->get();
         $memberGroups = $user->groups()->get();
         $allGroups = $createdGroups->merge($memberGroups)->unique('id');

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1>Grupo {{ $group->name }}</h1>
+    <h1 class="title">Grupo {{ $group->name }}</h1>
     @if (session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif
