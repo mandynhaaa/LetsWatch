@@ -5,23 +5,43 @@
 @endsection
 
 @section('content')
-    <h1 class="title">Meus Grupos</h1>
-    <a href="{{ route('groups.create') }}" style="padding: 10px; background-color: #007bff; color: white; border-radius: 5px; text-decoration: none;">+ Novo Grupo</a>
+<div class="groups-page">
+
+    <div class="groups-header">
+        <h1 class="title">Meus Grupos</h1>
+
+        <a href="{{ route('groups.create') }}" class="btn-primary">
+            + Novo Grupo
+        </a>
+    </div>
+
     @if ($allGroups->count() > 0)
-        <ul style="list-style: none; padding: 0; margin-top: 20px;">
+
+        <ul class="group-list">
             @foreach ($allGroups as $group)
-                <li style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-                    <a href="{{ route('groups.show', $group) }}">
-                        <h3>{{ $group->name }}</h3>
-                        <p>Membros: {{ $group->members->count() }}</p>
+                <li class="group-card">
+
+                    <a href="{{ route('groups.show', $group) }}" class="group-link">
+
+                        <div class="group-info">
+                            <h3>{{ $group->name }}</h3>
+                            <p class="members">Membros: {{ $group->members->count() }}</p>
+                        </div>
+
                         @if ($group->created_by_user_id === Auth::id())
-                            <span style="color: green; font-weight: bold;">(Você é o Criador)</span>
+                            <span class="badge-owner">Criador</span>
                         @endif
                     </a>
+
                 </li>
             @endforeach
         </ul>
+
     @else
-        <p style="margin-top: 20px;">Você ainda não pertence a nenhum grupo. Crie um novo ou entre usando um código de convite!</p>
-    @endif   
+        <p class="empty-message">
+            Você ainda não pertence a nenhum grupo.<br>
+            Crie um novo ou entre usando um código de convite!
+        </p>
+    @endif
+</div>
 @endsection

@@ -22,6 +22,12 @@
             </button>
         </form>
 
+        <div>
+            <a href="{{ route('login') }}">
+                Retornar ao Login
+            </a>
+        </div>
+
     </div>
 
 </div>

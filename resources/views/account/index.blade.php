@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container-center" style="margin-top: -50px">
+<div class="container-center">
     <div class="panel">
         <h1 class="title">Configurações da Conta</h1>
         @if (session('success'))

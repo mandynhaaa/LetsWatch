@@ -17,6 +17,9 @@
             <div class="form-group">
                 <label for="password">Senha</label>
                 <input id="password" type="password" name="password" required>
+                <a href="{{ route('password.request') }}">
+                    Esqueceu sua senha?
+                </a>
             </div>
             <div class="remember">
                 <input type="checkbox" name="remember" id="remember">
@@ -26,8 +29,8 @@
                 Entrar
             </button>
             <div>
-                <a href="{{ route('password.request') }}">
-                    Esqueceu sua senha?
+                <a href="{{ route('register') }}">
+                    Criar conta
                 </a>
             </div>
         </form>

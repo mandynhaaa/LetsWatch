@@ -14,52 +14,61 @@
     }
 
     card.addEventListener("pointerdown", e => {
-        dragging = true;
-        startX = e.clientX;
-        card.setPointerCapture(e.pointerId);
-        card.style.transition = "none";
-    });
+    dragging = true;
+    startX = e.clientX;
 
-    card.addEventListener("pointermove", e => {
-        if (!dragging) return;
+    // ? ADICIONA A CLASSE
+    card.classList.add("swiping");
 
-        currentX = e.clientX - startX;
-        const rot = currentX / 12;
+    card.setPointerCapture(e.pointerId);
+    card.style.transition = "none";
+});
 
-        setTransform(currentX, 0, rot);
+card.addEventListener("pointermove", e => {
+    if (!dragging) return;
 
-        if (currentX > 30) {
-            card.classList.add("show-like");
-            card.classList.remove("show-nope");
-        } else if (currentX < -30) {
-            card.classList.add("show-nope");
-            card.classList.remove("show-like");
+    currentX = e.clientX - startX;
+    const rot = currentX / 12;
+
+    setTransform(currentX, 0, rot);
+
+    if (currentX > 30) {
+        card.classList.add("show-like");
+        card.classList.remove("show-nope");
+    } else if (currentX < -30) {
+        card.classList.add("show-nope");
+        card.classList.remove("show-like");
+    } else {
+        card.classList.remove("show-like", "show-nope");
+    }
+});
+
+card.addEventListener("pointerup", () => {
+    dragging = false;
+
+    // ? REMOVE A CLASSE QUANDO SOLTAR
+    card.classList.remove("swiping");
+
+    card.style.transition = "";
+
+    if (Math.abs(currentX) > threshold) {
+
+        if (currentX > 0) {
+            // LIKE
+            card.style.transform = "translate(900px, 0) rotate(25deg)";
+            setTimeout(() => formLike.submit(), 250);
         } else {
-            card.classList.remove("show-like", "show-nope");
+            // DISLIKE
+            card.style.transform = "translate(-900px, 0) rotate(-25deg)";
+            setTimeout(() => formDislike.submit(), 250);
         }
-    });
 
-    card.addEventListener("pointerup", () => {
-        dragging = false;
-        card.style.transition = "";
+    } else {
+        card.style.transform = "";
+        card.classList.remove("show-like", "show-nope");
+    }
+});
 
-        if (Math.abs(currentX) > threshold) {
-
-            if (currentX > 0) {
-                // LIKE
-                card.style.transform = "translate(900px, 0) rotate(25deg)";
-                setTimeout(() => formLike.submit(), 250);
-            } else {
-                // DISLIKE
-                card.style.transform = "translate(-900px, 0) rotate(-25deg)";
-                setTimeout(() => formDislike.submit(), 250);
-            }
-
-        } else {
-            card.style.transform = "";
-            card.classList.remove("show-like", "show-nope");
-        }
-    });
 
     // Botäes
     document.getElementById("btn-like")?.addEventListener("click", () => {

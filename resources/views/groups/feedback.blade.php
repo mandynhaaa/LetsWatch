@@ -5,45 +5,54 @@
 @endsection
 
 @section('content')
-    <h1>Feedback para: {{ $movieDetails['title'] }}</h1>
+<div class="feedback-container">
+
+    <h1 class="movie-title">Feedback para: {{ $movieDetails['title'] }}</h1>
+
     @if (session('error'))
-        <p style="color: red;">{{ session('error') }}</p>
+        <p class="error-text">{{ session('error') }}</p>
     @endif
-    <div style="margin-bottom: 20px;">
-        <img src="{{ $movieDetails['poster_path'] }}" alt="{{ $movieDetails['title'] }}" style="max-width: 150px; border-radius: 8px;">
+
+    <div class="movie-poster">
+        <img src="{{ $movieDetails['poster_path'] }}" alt="{{ $movieDetails['title'] }}">
     </div>
-    <form method="POST" action="{{ route('groups.feedback.store', ['group' => $group->id, 'tmdbMovieId' => $movieDetails['id']]) }}">
+
+    <form class="feedback-form" method="POST" 
+          action="{{ route('groups.feedback.store', ['group' => $group->id, 'tmdbMovieId' => $movieDetails['id']]) }}">
         @csrf
-        <div>
+
+        <div class="form-group">
             <label for="rating">Nota (1 a 10):</label>
             <input 
-                type="number" 
-                id="rating" 
-                name="rating" 
-                min="1" 
-                max="10" 
+                type="number"
+                id="rating"
+                name="rating"
+                min="1"
+                max="10"
                 required
-                value="{{ old('rating', $existingFeedback->rating ?? '') }}" 
-                style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
+                value="{{ old('rating', $existingFeedback->rating ?? '') }}"
             >
-            @error('rating') <span style="color: red;">{{ $message }}</span> @enderror
+            @error('rating') <span class="error-text">{{ $message }}</span> @enderror
         </div>
-        <br>
-        <div>
+
+        <div class="form-group">
             <label for="comment">Comentário (Opcional):</label>
             <textarea 
-                id="comment" 
-                name="comment" 
-                rows="4" 
-                style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
+                id="comment"
+                name="comment"
+                rows="4"
             >{{ old('comment', $existingFeedback->comment ?? '') }}</textarea>
-            @error('comment') <span style="color: red;">{{ $message }}</span> @enderror
+            @error('comment') <span class="error-text">{{ $message }}</span> @enderror
         </div>
-        <button type="button" style="padding: 10px 20px; background-color: #898989; color: white; border: none; border-radius: 4px; cursor: pointer;" onclick="window.history.back();">
-            Voltar
-        </button>
-        <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
-            {{ $existingFeedback ? 'Atualizar Feedback' : 'Salvar Feedback' }}
-        </button>
+
+        <div class="button-row">
+            <button type="button" class="btn btn-secondary" onclick="window.history.back();">
+                Voltar
+            </button>
+            <button type="submit" class="btn btn-primary">
+                {{ $existingFeedback ? 'Atualizar Feedback' : 'Salvar Feedback' }}
+            </button>
+        </div>
     </form>
+</div>
 @endsection
