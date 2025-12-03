@@ -6,16 +6,14 @@
 
 @section('content')
 <div class="group-page">
-
-    {{-- CABEÇALHO --}}
+    @if (session('success'))
+        <p style="color: green;">{{ session('success') }}</p>
+    @endif
     <h1 class="title">
         {{ $group->name }}
         <span class="muted" style="font-size: 0.6em; font-weight: normal;">(ID: {{ $group->invite_code }})</span>
     </h1>
-
-    {{-- LISTA DE MEMBROS --}}
     <h3 class="sub-title">Membros do Grupo:</h3>
-
     <ul class="members-list">
         @foreach ($group->members as $member)
             <li>
@@ -26,13 +24,9 @@
             </li>
         @endforeach
     </ul>
-
-    {{-- MOVIES --}}
     <h2 class="sub-title">Filmes em Comum</h2>
-
     @if (count($moviesDetails) > 0)
         <p class="muted">Total: {{ count($moviesDetails) }}</p>
-
         <div class="movies-grid">
             @foreach ($moviesDetails as $movie)
                 <div class="movie-card">
@@ -48,6 +42,5 @@
     @else
         <p class="muted">Nenhum filme curtido ainda.</p>
     @endif
-
 </div>
 @endsection

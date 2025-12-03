@@ -29,7 +29,7 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
         Auth::login($user);
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Registro realizado com sucesso!');
     }
 
     public function showLoginForm()
@@ -75,10 +75,10 @@ class AuthController extends Controller
 
     public function verifyEmail(Request $request)
     {
-        if (! hash_equals((string) $request->route('id'), (string) $request->user()->getKey())) {
+        if (!hash_equals((string) $request->route('id'), (string) $request->user()->getKey())) {
             throw new \Exception('O ID do usuário não corresponde.');
         }
-        if (! hash_equals((string) $request->route('hash'), sha1($request->user()->getEmailForVerification()))) {
+        if (!hash_equals((string) $request->route('hash'), sha1($request->user()->getEmailForVerification()))) {
             throw new \Exception('O hash da verificação não corresponde.');
         }
         if ($request->user()->hasVerifiedEmail()) {
@@ -96,6 +96,6 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
         $request->user()->sendEmailVerificationNotification();
-        return back()->with('message', 'Link de verificação reenviado!');
+        return back()->with('success', 'Novo link de verificação reenviado para o seu e-mail!');
     }
 }

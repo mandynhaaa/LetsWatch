@@ -17,7 +17,7 @@
   --transition-fast: 220ms cubic-bezier(.2,.9,.3,1);
 }
 
-/* Reset b sico (mant‚m tailwind se estiver usando) */
+/* Reset bï¿½sico (mantï¿½m tailwind se estiver usando) */
 html,body{
   height:100%;
   margin:0;
@@ -32,9 +32,9 @@ html,body{
 .card-stack {
     width: 100%;
     max-width: 420px;
-    height: calc(100vh - 180px); /* espa‡o para nav + controles */
+    height: calc(100vh - 180px); /* espaï¿½o para nav + controles */
     max-height: unset;
-    margin: 0 auto 0; /* espa‡o do nav */
+    margin: 0 auto 0; /* espaï¿½o do nav */
     position: relative;
     display: flex;
     align-items: center;
@@ -61,19 +61,19 @@ html,body{
   user-select: none;
 }
 
-/* Mant‚m o poster inteiro no card, sem cortar */
+/* Mantï¿½m o poster inteiro no card, sem cortar */
 .draggable-card .card-media {
     width: 100%;
     aspect-ratio: 2 / 3;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    position: relative; /* necess rio para overlay */
+    position: relative; /* necessï¿½rio para overlay */
     border-radius: 16px 16px 0 0;
     overflow: hidden;
 }
 
-/* µrea de conte£do deve ser scroll vel somente se necess rio */
+/* ï¿½rea de conteï¿½do deve ser scrollï¿½vel somente se necessï¿½rio */
 .draggable-card .card-body {
     padding: 16px;
     flex: 1 1 auto;
@@ -91,7 +91,7 @@ html,body{
     flex-direction: column;
 }
 
-/* Gradiente + overlay de conte£do */
+/* Gradiente + overlay de conteï¿½do */
 .card-overlay {
     position: absolute;
     bottom: 0;
@@ -100,7 +100,7 @@ html,body{
     color: white;
     z-index: 5;
 
-    /* Gradiente do rodap‚ sobre o poster */
+    /* Gradiente do rodapï¿½ sobre o poster */
     background: linear-gradient(
         to top,
         rgba(0, 0, 0, 0.897) 0%,
@@ -110,32 +110,32 @@ html,body{
     );
 }
 
-/* T¡tulo */
+/* Tï¿½tulo */
 .card-overlay h2 {
     font-size: 1.3rem;
     font-weight: 700;
     margin: 0;
 }
 
-/* Nota / gˆneros */
+/* Nota / gï¿½neros */
 .card-overlay .info {
     font-size: 0.95rem;
     opacity: 0.9;
 }
 
-/* Descri‡Æo curta no overlay */
+/* Descriï¿½ï¿½o curta no overlay */
 .card-overlay .small-overview {
     font-size: 0.85rem;
     line-height: 1.3;
     margin-top: 8px;
 
-    /* removendo limita‡äes */
+    /* removendo limitaï¿½ï¿½es */
     max-height: none !important;
     overflow: visible !important;
 }
 
 
-/* Conte£do principal abaixo do poster */
+/* Conteï¿½do principal abaixo do poster */
 .draggable-card .card-body {
     padding: 16px;
     color: #d1d5db;
@@ -266,7 +266,7 @@ html,body{
   color:var(--muted);
 }
 
-/* ---- BOTåES CIRCULARES ---- */
+/* ---- BOTï¿½ES CIRCULARES ---- */
 .circle-btn {
   width: 60px;
   height: 60px;
@@ -293,6 +293,11 @@ html,body{
   color: #e74c3c;
 }
 
+.circle-btn.trailer {
+  border-color: #c2c2c2;
+  color: #c2c2c2;
+}
+
 /* Hover efeito opcional */
 .circle-btn:hover {
   transform: scale(1.1);
@@ -310,7 +315,7 @@ html,body{
 
 /* Groups*/
 
-/* --- PµGINA DE GRUPOS --- */
+/* --- Pï¿½GINA DE GRUPOS --- */
 
 .groups-page {
     padding: 30px 20px;
@@ -550,7 +555,7 @@ html,body{
     border-radius: 8px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     display: block;
-    margin: 0 auto; /* garante centraliza‡Æo */
+    margin: 0 auto; /* garante centralizaï¿½ï¿½o */
 }
 
 .feedback-form {

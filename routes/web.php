@@ -24,9 +24,11 @@ Auth::routes([
     'verify' => false
 ]);
 
+Route::get('/', [MovieController::class, 'index'])->name('index');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/', [MovieController::class, 'index'])->name('home');
+    Route::get('/home', [MovieController::class, 'home'])->name('home');
     Route::post('/swipe', [MovieController::class, 'storeSwipe'])->name('swipe'); 
 
     Route::get('/groups', [GroupController::class, 'listMyGroups'])->name('groups.index');
