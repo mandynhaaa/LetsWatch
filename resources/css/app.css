@@ -27,16 +27,17 @@ body {
     font-family: var(--font-sans);
 }
 
-/* Container que centraliza tudo */
+/* Container que centraliza tudo (Usado no Login, etc) */
 .container-center {
-    min-height: calc(100vh - 0px);
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--bg);
+    padding: 20px;
 }
 
-/* Painel padr�o */
+/* Painel padrão (Cards de Login, Conta, Grupos) */
 .panel {
     width: 100%;
     max-width: 420px;
@@ -51,53 +52,27 @@ body {
 /* Texto dentro do painel */
 .panel p {
     color: var(--text-muted);
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 30px;
+    line-height: 1.5;
 }
 
-/* Links / Bot�es padr�o */
+/* Links / Botões padrão */
 .panel a {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-decoration: none;
     transition: 0.2s ease-in-out;
 }
 
-/* Bot�o cinza */
-.btn-login {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    color: #e0e0e0;
-}
-
-.btn-login:hover {
-    background: rgba(255,255,255,0.12);
-}
-
-/* Bot�o de criar conta */
-.btn-register {
-    background: linear-gradient(90deg, var(--tinder-grad-1), var(--tinder-grad-2));
-    color: #fff;
-}
-
-.btn-register:hover {
-    filter: brightness(1.1);
-}
-
 /* LOGO */
 .logo {
-    width: 260px;
+    width: 200px;
     margin-bottom: 25px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* Formulários */
 form {
     text-align: left;
     margin-top: 10px;
@@ -110,53 +85,7 @@ form label {
     font-size: 0.95rem;
 }
 
-form input[type="email"],
-form input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    background: #111;
-    border: 1px solid rgba(255,255,255,0.08);
-    color: #fff;
-    margin-bottom: 18px;
-}
-
-form input[type="email"]:focus,
-form input[type="password"]:focus {
-    outline: none;
-    border-color: var(--tinder-grad-2);
-    box-shadow: 0 0 8px rgba(249, 19, 19, 0.729);
-}
-
-.remember {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 15px 0;
-}
-
-button[type="submit"],
-button[type="button"] {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 600;
-    background: linear-gradient(90deg, var(--tinder-grad-1), var(--tinder-grad-2));
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-button[type="submit"]:hover {
-    filter: brightness(1.1);
-}
-
-.error {
-    color: #ff5b5b;
-    font-size: 0.85rem;
-}
-
+/* Inputs de Texto */
 form input[type="text"],
 form input[type="email"],
 form input[type="password"] {
@@ -167,22 +96,26 @@ form input[type="password"] {
     border: 1px solid rgba(255,255,255,0.08);
     color: #fff;
     margin-bottom: 18px;
+    box-sizing: border-box; /* Garante que padding não estoure a largura */
 }
 
-form input[type="text"]:focus,
-form input[type="email"]:focus,
-form input[type="password"]:focus {
+form input:focus {
     outline: none;
     border-color: var(--tinder-grad-2);
-    box-shadow: 0 0 8px rgba(249, 19, 19, 0.729);
+    box-shadow: 0 0 8px rgba(249, 19, 19, 0.4);
 }
 
-.title {
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 20px;
+/* Checkbox Remember */
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0;
 }
 
+/* Botões Gerais */
+button[type="submit"],
+button[type="button"],
 .btn-resend-email {
     width: 100%;
     padding: 14px;
@@ -193,36 +126,53 @@ form input[type="password"]:focus {
     color: #fff;
     cursor: pointer;
     transition: 0.2s;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
+button[type="submit"]:hover,
 .btn-resend-email:hover {
     filter: brightness(1.1);
 }
 
-.panel p {
-    color: var(--text-muted);
-    font-size: 1rem;
-    line-height: 1.5;
+/* Botão Login Cinza (se usado) */
+.btn-login {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: #e0e0e0;
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: block;
+    margin-top: 10px;
 }
 
-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 5;     
+.btn-login:hover {
+    background: rgba(255,255,255,0.12);
 }
 
+/* Títulos */
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* Erros */
+.error {
+    color: #ff5b5b;
+    font-size: 0.85rem;
+}
+
+/* Navegação Padrão (das outras páginas) */
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     gap: 20px;
+    justify-content: center;
 }
 
 nav ul li a {
@@ -235,3 +185,28 @@ nav ul li a:hover {
     color: #fe3927;
 }
 
+/* --- ESTILOS ESPECÍFICOS DE GRUPOS (Restaurados) --- */
+
+.group-card {
+    background: var(--panel);
+    margin-bottom: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 15px;
+    transition: 0.25s ease;
+}
+
+.group-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+.badge-owner {
+    background: #2ee6a5; /* Verde sucesso */
+    color: #0f0f0f;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-left: 6px;
+}
