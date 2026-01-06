@@ -12,7 +12,7 @@
         </p>
         <form class="d-inline" method="POST" action="{{ route('verification.send') }}">
             @csrf
-            <button type="submit" class="btn-resend-email">
+            <button type="submit" class="btn">
                 Reenviar e-mail de verificação
             </button>
         </form>

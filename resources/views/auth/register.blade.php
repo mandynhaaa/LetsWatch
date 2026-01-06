@@ -33,7 +33,7 @@
                 <label for="password_confirmation">Confirmar Senha</label>
                 <input id="password_confirmation" type="password" name="password_confirmation" required>
             </div>
-            <button type="submit">Registrar</button>
+            <button type="submit" class="btn">Registrar</button>
             <div>
                 <a href="{{ route('login') }}">
                     Retornar ao Login
