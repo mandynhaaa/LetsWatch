@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 
 php artisan config:cache
