@@ -10,16 +10,16 @@
             <input type="hidden" name="email" value="{{ $email ?? old('email') }}">
             <div class="form-group">
                 <label for="password">Nova Senha:</label>
-                <input id="password" type="password" name="password" required style="width: 100%; padding: 8px;">
+                <input id="password" type="password" name="password" required>
                 @error('password')
-                    <span style="color: red;">{{ $message }}</span>
+                    <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="password_confirmation">Confirmar Senha:</label>
-                <input id="password_confirmation" type="password" name="password_confirmation" required style="width: 100%; padding: 8px;">
+                <input id="password_confirmation" type="password" name="password_confirmation" required>
             </div>
-            <button type="submit" style="padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            <button type="submit" class="btn">
                 Redefinir Senha
             </button>
         </form>

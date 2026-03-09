@@ -8,7 +8,7 @@
 <div class="container-center" style="margin-top: -50px">
     <div class="panel">
         @if (session('error'))
-            <p style="color: red; text-align: center;">{{ session('error') }}</p>
+            <p class="error">{{ session('error') }}</p>
         @endif
         <h1 class="title">Criar Novo Grupo</h1>
         <form method="POST" action="{{ route('groups.store') }}">
@@ -20,9 +20,9 @@
                     <span>{{ $message }}</span>
                 @enderror
             </div>
-            <button type="submit">Criar Grupo</button>
+            <button type="submit" class="btn">Criar Grupo</button>
         </form>
-        <hr style="margin: 20px 0 20px 0;">
+        <hr>
         <h1 class="title">Entrar em um Grupo Existente</h1>
         <form method="POST" action="{{ route('groups.join') }}">
             @csrf
@@ -33,7 +33,7 @@
                     <span>{{ $message }}</span>
                 @enderror
             </div>
-            <button type="submit">Entrar</button>
+            <button type="submit" class="btn">Entrar</button>
         </form>
     </div>
 </div>

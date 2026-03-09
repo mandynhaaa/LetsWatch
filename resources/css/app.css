@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import './theme.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -16,27 +15,41 @@
     --text-muted: #c9c9c9;
     --tinder-grad-1: #fe3927;
     --tinder-grad-2: #d60909;
+    --accent-glow: rgba(255, 107, 129, 0.14);
+    --card-radius: 16px;
+    --card-shadow: 0 10px 30px rgba(2, 6, 23, 0.7);
+    --glass: rgba(255, 255, 255, 0.03);
+    --text: #e6eef6;
+    --success: #2ee6a5;
+    --danger: #ff7b7b;
+    --transition-fast: 220ms cubic-bezier(.2, .9, .3, 1);
 }
 
-/* Fundo geral */
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+}
+
+html,
 body {
     margin: 0;
     padding: 0;
     background: var(--bg);
     color: #fff;
-    font-family: var(--font-sans);
+    color: var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Container que centraliza tudo */
 .container-center {
-    min-height: calc(100vh - 0px);
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--bg);
 }
 
-/* Painel padr�o */
 .panel {
     width: 100%;
     max-width: 420px;
@@ -44,18 +57,16 @@ body {
     background: var(--panel);
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Texto dentro do painel */
 .panel p {
     color: var(--text-muted);
     font-size: 1.1rem;
     margin-bottom: 30px;
 }
 
-/* Links / Bot�es padr�o */
 .panel a {
     width: 100%;
     padding: 14px;
@@ -68,34 +79,264 @@ body {
     transition: 0.2s ease-in-out;
 }
 
-/* Bot�o cinza */
-.btn-login {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    color: #e0e0e0;
+.draggable-card {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: calc(100% - 48px);
+    height: 100%;
+    max-height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    will-change: transform, opacity;
+    transition: transform var(--transition-fast), box-shadow 200ms ease, opacity 160ms ease;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
 }
 
-.btn-login:hover {
-    background: rgba(255,255,255,0.12);
+.draggable-card .card-media {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
 }
 
-/* Bot�o de criar conta */
-.btn-register {
+.draggable-card .card-body {
+    padding: 16px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.draggable-card {
+    max-height: 90dvh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
     background: linear-gradient(90deg, var(--tinder-grad-1), var(--tinder-grad-2));
+    border: none;
     color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.btn-register:hover {
-    filter: brightness(1.1);
+.circle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border: 3px solid transparent;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
 }
 
-/* LOGO */
+.circle-btn.like {
+    border-color: #2ecc71;
+    color: #2ecc71;
+}
+
+.circle-btn.like:hover {
+    box-shadow: 0 0 30px rgba(46, 204, 113, 0.6);
+}
+
+.circle-btn.dislike {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.circle-btn.dislike:hover {
+    box-shadow: 0 0 30px rgba(231, 76, 60, 0.6);
+}
+
+.circle-btn svg {
+    width: 30px;
+    height: 30px;
+    fill: currentColor;
+}
+
+.circle-btn.trailer {
+    border-color: #c2c2c2;
+    color: #c2c2c2;
+    width: 75px;
+    height: 75px;
+}
+
+.circle-btn.trailer:hover {
+    box-shadow: 0 0 30px rgba(167, 165, 165, 0.6);
+}
+
+.circle-btn.trailer svg {
+    width: 50px;
+    height: 50px;
+}
+
+.circle-btn:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
+}
+
+.btn:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.06);
+    outline-offset: 2px;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 18px 16px 22px;
+    color: white;
+    z-index: 5;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.897) 0%,
+            rgba(0, 0, 0, 0.807) 35%,
+            rgba(0, 0, 0, 0.807) 60%,
+            transparent 100%);
+}
+
+.card-overlay h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.card-overlay .info {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.card-overlay .small-overview {
+    font-size: 0.85rem;
+    line-height: 1.3;
+    margin-top: 8px;
+    max-height: none;
+    overflow: visible;
+}
+
+.draggable-card .card-body {
+    padding: 16px;
+    color: #d1d5db;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    overflow-y: auto;
+    max-height: 220px;
+}
+
+.draggable-card h3 {
+    margin: 0;
+    font-size: 1.18rem;
+    font-weight: 700;
+}
+
+.draggable-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.draggable-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--card-radius);
+    padding: 1px;
+    background: linear-gradient(90deg, var(--tinder-grad-1), var(--tinder-grad-2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.08;
+    pointer-events: none;
+}
+
+.badge {
+    position: absolute;
+    top: 40%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    transform: translateZ(0);
+    opacity: 0;
+    transition: opacity 120ms ease, transform 120ms ease;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.badge.like {
+    color: #22c55e;
+    margin-left: 30%;
+}
+
+.badge.nope {
+    color: #ef4444;
+    margin-left: 30%;
+}
+
+.draggable-card.show-like .badge.like {
+    opacity: 1;
+    transform: translateY(0) rotate(-3deg);
+}
+
+.draggable-card.show-nope .badge.nope {
+    opacity: 1;
+    transform: translateY(0) rotate(3deg);
+}
+
+.draggable-card.swiping .card-media {
+    filter: blur(6px);
+    transition: filter 180ms ease;
+}
+
+.card-stack .draggable-card:nth-child(2) {
+    transform: translateY(10px) scale(0.98);
+    filter: blur(.2px);
+}
+
+.card-stack .draggable-card:nth-child(3) {
+    transform: translateY(20px) scale(0.96);
+    opacity: .92;
+}
+
+@keyframes flyOutRight {
+    to {
+        transform: translateX(1200px) rotate(30deg) scale(1.08);
+        opacity: 0;
+    }
+}
+
+@keyframes flyOutLeft {
+    to {
+        transform: translateX(-1200px) rotate(-30deg) scale(1.08);
+        opacity: 0;
+    }
+}
+
 .logo {
-    width: 260px;
-    margin-bottom: 25px;
+    width: 280px;
+    margin: 0 auto 30px auto;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 form {
@@ -110,17 +351,19 @@ form label {
     font-size: 0.95rem;
 }
 
+form input[type="text"],
 form input[type="email"],
 form input[type="password"] {
     width: 100%;
     padding: 12px;
     border-radius: 12px;
     background: #111;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     color: #fff;
     margin-bottom: 18px;
 }
 
+form input[type="text"]:focus,
 form input[type="email"]:focus,
 form input[type="password"]:focus {
     outline: none;
@@ -135,69 +378,15 @@ form input[type="password"]:focus {
     margin: 15px 0;
 }
 
-button[type="submit"],
-button[type="button"] {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 600;
-    background: linear-gradient(90deg, var(--tinder-grad-1), var(--tinder-grad-2));
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-button[type="submit"]:hover {
-    filter: brightness(1.1);
-}
-
 .error {
     color: #ff5b5b;
     font-size: 0.85rem;
-}
-
-form input[type="text"],
-form input[type="email"],
-form input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    background: #111;
-    border: 1px solid rgba(255,255,255,0.08);
-    color: #fff;
-    margin-bottom: 18px;
-}
-
-form input[type="text"]:focus,
-form input[type="email"]:focus,
-form input[type="password"]:focus {
-    outline: none;
-    border-color: var(--tinder-grad-2);
-    box-shadow: 0 0 8px rgba(249, 19, 19, 0.729);
 }
 
 .title {
     font-size: 26px;
     font-weight: 700;
     margin-bottom: 20px;
-}
-
-.btn-resend-email {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 600;
-    background: linear-gradient(90deg, var(--tinder-grad-1), var(--tinder-grad-2));
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s;
-    margin-top: 20px;
-}
-
-.btn-resend-email:hover {
-    filter: brightness(1.1);
 }
 
 .panel p {
@@ -208,13 +397,13 @@ form input[type="password"]:focus {
 
 nav {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 15px;
-    margin-top: 30px;
     margin-bottom: 15px;
     position: relative;
-    z-index: 5;     
+    padding: 20px;
+    border-bottom: thin solid rgb(110, 110, 110);
+    z-index: 10;
 }
 
 nav ul {
@@ -226,7 +415,7 @@ nav ul {
 }
 
 nav ul li a {
-    color: rgb(116, 116, 116);
+    color: rgb(186, 186, 186);
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -235,3 +424,355 @@ nav ul li a:hover {
     color: #fe3927;
 }
 
+.logo-area {
+    position: absolute;
+    left: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-area img {
+    width: 150px;
+}
+
+.cinema-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(40px) brightness(0.4);
+    transform: scale(1.1);
+    z-index: 0;
+}
+
+.card-stack {
+    width: 100%;
+    max-width: 380px;
+    height: calc(100dvh - 180px);
+    max-height: unset;
+    margin: 0 auto 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.controls {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+hr {
+    margin: 20px 0 20px 0;
+}
+
+.groups-page {
+    padding: 30px 20px;
+    max-width: 540px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.groups-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--tinder-grad-1), var(--tinder-grad-2));
+    padding: 10px 16px;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.12);
+}
+
+.group-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.group-card {
+    background: var(--panel);
+    margin-bottom: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.25s ease;
+}
+
+.group-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.group-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.group-info h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.group-info .members {
+    margin-top: 4px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.badge-owner {
+    background: var(--success);
+    color: #0f0f0f;
+    padding: 6px 10px;
+    font-weight: 700;
+    border-radius: 10px;
+    font-size: 0.78rem;
+}
+
+.empty-message {
+    margin-top: 30px;
+    text-align: center;
+    opacity: 0.7;
+    line-height: 1.5;
+}
+
+.alert-success {
+    background: rgba(46, 230, 165, 0.1);
+    border: 1px solid var(--success);
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    color: var(--success);
+}
+
+.sub-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 30px;
+}
+
+.toggle-btn {
+    width: 100%;
+    background: linear-gradient(90deg, var(--tinder-grad-1), var(--tinder-grad-2));
+    color: #fff;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+    margin-top: 20px;
+}
+
+.toggle-btn:hover {
+    filter: brightness(1.1);
+}
+
+.toggle-box {
+    margin-top: 12px;
+    display: none;
+    background: var(--panel);
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.toggle-box.open {
+    display: block;
+}
+
+.invite-title {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.members-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 15px;
+}
+
+.members-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.badge-owner {
+    background: var(--success);
+    color: #0f0f0f;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.movie-card {
+    padding: 12px;
+    background: var(--panel);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.25s ease;
+    text-align: center;
+}
+
+.movie-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+.movie-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.movie-card h3 {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: var(--text);
+}
+
+.movie-release {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.movie-rating {
+    color: #ffc107;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.muted {
+    opacity: 0.75;
+}
+
+.feedback-container {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.movie-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.error-text {
+    color: red;
+    font-size: 0.9rem;
+}
+
+.movie-poster {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.movie-poster img {
+    width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    display: block;
+    margin: 0 auto;
+}
+
+.feedback-form {
+    background: #303030;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #eeeeee;
+    color: #141414;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #ccc;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.fdk {
+    all: unset;
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.fdk-submit {
+    background-color: #007bff;
+}
+
+.fdk-cancel {
+    background-color: #777;
+}
+
+#form-like,
+#form-dislike {
+    display: none;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}

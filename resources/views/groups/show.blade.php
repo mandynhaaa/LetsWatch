@@ -7,11 +7,11 @@
 @section('content')
 <div class="group-page">
     @if (session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
+        <p class="success">{{ session('success') }}</p>
     @endif
     <h1 class="title">
         {{ $group->name }}
-        <span class="muted" style="font-size: 0.6em; font-weight: normal;">(ID: {{ $group->invite_code }})</span>
+        <span class="muted" class="">(Código de Convite: {{ $group->invite_code }})</span>
     </h1>
     <h3 class="sub-title">Membros do Grupo:</h3>
     <ul class="members-list">

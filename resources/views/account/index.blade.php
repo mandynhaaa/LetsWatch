@@ -9,10 +9,10 @@
     <div class="panel">
         <h1 class="title">Configurações da Conta</h1>
         @if (session('success'))
-            <p style="color: green;">{{ session('success') }}</p>
+            <p class="sucess">{{ session('success') }}</p>
         @endif
         @if (session('error'))
-            <p style="color: red; text-align: center;">{{ session('error') }}</p>
+            <p class="error">{{ session('error') }}</p>
         @endif
         <form method="POST" action="{{ route('account.update') }}">
             @csrf
@@ -36,15 +36,15 @@
                 <input id="password_confirmation" type="password" name="password_confirmation">
                 @error('password_confirmation') <span>{{ $message }}</span> @enderror
             </div>
-            <button type="submit">
+            <button type="submit" class="btn">
                 Atualizar Dados
             </button>
         </form>
-        <hr style="margin: 20px 0 20px 0;">
+        <hr
         <h1 class="title">Sair da Conta</h1>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit">Deslogar</button>
+            <button type="submit" class="btn">Deslogar</button>
         </form>
     </div>
 </div>
