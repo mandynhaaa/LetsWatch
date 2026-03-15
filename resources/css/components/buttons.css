@@ -1,0 +1,223 @@
+.btn {
+  width: 100%;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  background: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2));
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.btn:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.06);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2));
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  color: white;
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  transition: var(--transition-normal);
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.12);
+}
+
+.circle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  border: 3px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.circle-btn:hover {
+  transform: scale(1.1);
+}
+
+.circle-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+.circle-btn.like {
+  border-color: #2ecc71;
+  color: #2ecc71;
+}
+
+.circle-btn.like:hover {
+  box-shadow: 0 0 30px rgba(46, 204, 113, 0.6);
+}
+
+.circle-btn.dislike {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.circle-btn.dislike:hover {
+  box-shadow: 0 0 30px rgba(231, 76, 60, 0.6);
+}
+
+.circle-btn.trailer {
+  border-color: #c2c2c2;
+  color: #c2c2c2;
+  width: 75px;
+  height: 75px;
+}
+
+.circle-btn.trailer:hover {
+  box-shadow: 0 0 30px rgba(167, 165, 165, 0.6);
+}
+
+.circle-btn.trailer svg {
+  width: 50px;
+  height: 50px;
+}
+
+.toggle-btn {
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2));
+  color: #fff;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  border: none;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  margin-top: var(--spacing-lg);
+}
+
+.toggle-btn:hover {
+  filter: brightness(1.1);
+}
+
+.controls {
+  position: fixed;
+  bottom: var(--spacing-lg);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.badge {
+  position: absolute;
+  top: 40%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  transform: translateZ(0);
+  opacity: 0;
+  transition: opacity 120ms ease, transform 120ms ease;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.badge.like {
+  color: #22c55e;
+  margin-left: 30%;
+}
+
+.badge.nope {
+  color: #ef4444;
+  margin-left: 30%;
+}
+
+.draggable-card.show-like .badge.like {
+  opacity: 1;
+  transform: translateY(0) rotate(-3deg);
+}
+
+.draggable-card.show-nope .badge.nope {
+  opacity: 1;
+  transform: translateY(0) rotate(3deg);
+}
+
+.badge-owner {
+  background: var(--color-success);
+  color: var(--color-bg);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  margin-left: var(--spacing-xs);
+}
+
+@media (min-width: 768px) {
+  .circle-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 36px;
+  }
+
+  .circle-btn svg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .circle-btn.trailer {
+    width: 85px;
+    height: 85px;
+  }
+
+  .circle-btn.trailer svg {
+    width: 55px;
+    height: 55px;
+  }
+
+  .controls {
+    gap: var(--spacing-2xl);
+  }
+
+  .badge {
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .circle-btn {
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+  }
+
+  .circle-btn svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .circle-btn.trailer {
+    width: 95px;
+    height: 95px;
+  }
+
+  .circle-btn.trailer svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .controls {
+    bottom: var(--spacing-xl);
+  }
+}

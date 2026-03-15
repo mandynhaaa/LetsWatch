@@ -8,7 +8,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/cards.js'])
     @stack('scripts')
 </head>
-
 <body class="min-h-screen bg-[var(--bg)] text-[var(--text)]">
     <div id="app" class="min-h-screen">
         <header>
@@ -18,5 +17,6 @@
             @yield('content')
         </main>
     </div>
+    @includeIf('components.footer')
 </body>
 </html>

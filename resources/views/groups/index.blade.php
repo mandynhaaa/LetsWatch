@@ -13,7 +13,7 @@
         </a>
     </div>
     @if ($allGroups->count() > 0)
-        <ul class="group-list">
+        <ul class="groups-list">
             @foreach ($allGroups as $group)
                 <li class="group-card">
                     <a href="{{ route('groups.show', $group) }}" class="group-link">

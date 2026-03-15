@@ -40,7 +40,7 @@
                 Atualizar Dados
             </button>
         </form>
-        <hr
+        <hr/>
         <h1 class="title">Sair da Conta</h1>
         <form method="POST" action="{{ route('logout') }}">
             @csrf

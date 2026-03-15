@@ -88,6 +88,9 @@ class GroupController extends Controller
                     'release_date' => isset($movieData['release_date']) && $movieData['release_date'] !== 'N/A' 
                         ? \Carbon\Carbon::parse($movieData['release_date'])->format('d/m/Y') 
                         : 'N/A',
+                    'genres' => isset($movieData['genres']) 
+                        ? implode(', ', array_column($movieData['genres'], 'name')) 
+                        : '',
                 ];
             }
         }
