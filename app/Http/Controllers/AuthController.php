@@ -21,7 +21,8 @@ class AuthController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'nullable|string|min:8',
+            'password_confirmation' => 'required_with:password|same:password',
         ]);
         $user = User::create([
             'name' => $validated['name'],
@@ -49,7 +50,7 @@ class AuthController extends Controller
             return redirect()->intended('home');
         }
         throw ValidationException::withMessages([
-            'email' => 'As credenciais fornecidas não correspondem aos nossos registros.',
+            'error' => 'As credenciais fornecidas não correspondem aos nossos registros.',
         ]);
     }
 
@@ -68,9 +69,11 @@ class AuthController extends Controller
 
     public function showVerificationNotice(Request $request)
     {
-        return $request->user()->hasVerifiedEmail()
-                    ? redirect()->route('home')
-                    : view('auth.verify-email');
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect()->route('home');
+        }
+        $this->sendVerificationEmail($request); 
+        return view('auth.verify-email');
     }
 
     public function verifyEmail(Request $request)
@@ -95,7 +98,12 @@ class AuthController extends Controller
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->route('home');
         }
-        $request->user()->sendEmailVerificationNotification();
+        $this->sendVerificationEmail($request);
         return back()->with('success', 'Novo link de verificação reenviado para o seu e-mail!');
+    }
+
+    public function sendVerificationEmail(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
     }
 }

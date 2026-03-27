@@ -11,13 +11,12 @@
             <div class="form-group">
                 <label for="password">Nova Senha:</label>
                 <input id="password" type="password" name="password" required>
-                @error('password')
-                    <span class="error">{{ $message }}</span>
-                @enderror
+                @error('password') <x-alert-error :message="$message" /> @enderror
             </div>
             <div class="form-group">
                 <label for="password_confirmation">Confirmar Senha:</label>
                 <input id="password_confirmation" type="password" name="password_confirmation" required>
+                @error('password_confirmation') <x-alert-error :message="$message" /> @enderror
             </div>
             <button type="submit" class="btn">
                 Redefinir Senha

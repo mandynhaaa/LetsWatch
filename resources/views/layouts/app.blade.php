@@ -9,11 +9,20 @@
     @stack('scripts')
 </head>
 <body class="min-h-screen bg-[var(--bg)] text-[var(--text)]">
-    <div id="app" class="min-h-screen">
+    <div class="min-h-screen flex flex-col">
         <header>
             @yield('nav')
         </header>
         <main>
+            @if (session('status'))
+                <x-alert-success :message="session('status')" />
+            @endif
+            @if (session('success'))
+                <x-alert-success :message="session('success')" />
+            @endif
+            @if (session('error'))
+                <x-alert-error :message="session('error')" />
+            @endif
             @yield('content')
         </main>
     </div>

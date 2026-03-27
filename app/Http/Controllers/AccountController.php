@@ -21,7 +21,8 @@ class AccountController extends Controller
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8|confirmed', 
+            'password' => 'nullable|string|min:8',
+            'password_confirmation' => 'required_with:password|same:password',
         ];
         $validated = $request->validate($rules);
         $updateData = [
