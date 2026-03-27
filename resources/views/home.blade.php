@@ -8,7 +8,7 @@
 <div class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black py-12">
     
     @if ($movie)
-        <div class="fixed inset-0 z-0 bg-cover bg-center blur-[100px] opacity-30 scale-110" 
+        <div class="fixed inset-0 z-0 bg-cover bg-center blur-[15px] opacity-50 scale-100" 
              style="background-image: url('{{ $posterBaseUrl . $movie['poster_path'] }}');">
         </div>
 
