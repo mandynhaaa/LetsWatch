@@ -7,7 +7,7 @@
     const overview = document.getElementById("movie-overview");
     let startX = 0, currentX = 0, dragging = false;
     const threshold = 120;
-    const ANIMATION_DURATION = 950;
+    const ANIMATION_DURATION = 450;
     if (btnExpand && overview) {
         btnExpand.addEventListener("pointerdown", (e) => e.stopPropagation());
         btnExpand.addEventListener("click", (e) => {
@@ -56,17 +56,16 @@
         if (!dragging) return;
         dragging = false;
         card.classList.remove("swiping");
-        card.style.transition = `transform ${ANIMATION_DURATION}ms cubic-bezier(0.165, 0.84, 0.44, 1)`;
+        card.style.transition = `transform ${ANIMATION_DURATION}ms linear`;
 
         if (Math.abs(currentX) > threshold) {
             card.style.pointerEvents = 'none';
             if (currentX > 0) {
                 card.style.transform = "translate(1000px, 0) rotate(35deg)";
-                setTimeout(() => formLike.submit(), ANIMATION_DURATION);
             } else {
                 card.style.transform = "translate(-1000px, 0) rotate(-35deg)";
-                setTimeout(() => formDislike.submit(), ANIMATION_DURATION);
             }
+            formDislike.submit();
         } else {
             card.style.transform = "";
             card.classList.remove("show-like", "show-nope");
@@ -75,15 +74,15 @@
 
     document.getElementById("btn-like")?.addEventListener("click", () => {
         card.style.pointerEvents = 'none';
-        card.style.transition = `transform ${ANIMATION_DURATION}ms cubic-bezier(0.165, 0.84, 0.44, 1)`;
+        card.style.transition = `transform ${ANIMATION_DURATION}ms linear`;
         card.style.transform = "translate(1000px, 0) rotate(35deg)";
-        setTimeout(() => formLike.submit(), ANIMATION_DURATION);
+        formLike.submit();
     });
 
     document.getElementById("btn-nope")?.addEventListener("click", () => {
         card.style.pointerEvents = 'none';
-        card.style.transition = `transform ${ANIMATION_DURATION}ms cubic-bezier(0.165, 0.84, 0.44, 1)`;
+        card.style.transition = `transform ${ANIMATION_DURATION}ms linear`;
         card.style.transform = "translate(-1000px, 0) rotate(-35deg)";
-        setTimeout(() => formDislike.submit(), ANIMATION_DURATION);
+        formDislike.submit();
     });
 })();
