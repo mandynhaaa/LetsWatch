@@ -9,7 +9,8 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/cards.js',
-                'resources/js/copy.js'
+                'resources/js/copy.js',
+                'resources/js/nav.js'
             ],
             refresh: true,
         }),
